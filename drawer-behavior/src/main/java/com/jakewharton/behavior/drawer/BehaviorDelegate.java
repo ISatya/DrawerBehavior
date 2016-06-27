@@ -214,6 +214,9 @@ final class BehaviorDelegate extends ViewDragHelper.Callback {
   }
 
   private void closeDrawers(boolean peekingOnly) {
+
+    removeCallbacks();
+
     if (peekingOnly && !isPeeking) {
       return;
     }
@@ -225,8 +228,6 @@ final class BehaviorDelegate extends ViewDragHelper.Callback {
       needsSettle = dragger.smoothSlideViewTo(child, parent.getWidth(), child.getTop());
     }
     isPeeking = false;
-
-    removeCallbacks();
 
     if (needsSettle) {
       ViewCompat.postOnAnimation(parent, draggerSettle);
